@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <link rel="stylesheet" href="additem.css">
+       
+   
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <p>Welcome Vendor</p>
+        <a href="#">Product Status</a>
+        <a href="#">Request Item</a>
+        <a href="#">View Product</a>
+        <a href="#">Log Out</a>
+    </nav>
+
+    <!-- Main container -->
+    <div class="container">
+        <h1>Manage Your Products</h1>
+
+        <!-- Add Product Form -->
+        <form id="product-form">
+            <div class="form-group">
+                <label for="product-name">Product Name</label>
+                <input type="text" id="product-name" placeholder="Enter product name" required>
+            </div>
+            <div class="form-group">
+                <label for="product-price">Product Price</label>
+                <input type="number" id="product-price" placeholder="Enter product price" required>
+            </div>
+            <div class="form-group">
+                <label for="product-image">Product Image URL</label>
+                <input type="url" id="product-image" placeholder="Enter image URL" required>
+            </div>
+            <button type="button" id="add-product">Add Product</button>
+        </form>
+
+        <!-- Product List -->
+        <div class="product-list" id="product-list"></div>
+    </div>
+
+    <script>
+        // Get form elements
+        const productNameInput = document.getElementById('product-name');
+        const productPriceInput = document.getElementById('product-price');
+        const productImageInput = document.getElementById('product-image');
+        const addProductButton = document.getElementById('add-product');
+        const productList = document.getElementById('product-list');
+
+        // Event listener for the add product button
+        addProductButton.addEventListener('click', () => {
+            const name = productNameInput.value.trim();
+            const price = productPriceInput.value.trim();
+            const image = productImageInput.value.trim();
+
+            // Check if all fields are filled
+            if (!name || !price || !image) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            // Create a product card
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+            productCard.innerHTML = `
+                <img src="${image}" alt="${name}">
+                <h3>${name}</h3>
+                <p>Price: $${price}</p>
+            `;
+
+            // Append the product card to the product list
+            productList.appendChild(productCard);
+
+            // Clear the form inputs
+            productNameInput.value = '';
+            productPriceInput.value = '';
+            productImageInput.value = '';
+        });
+    </script>
+</body>
+</html>

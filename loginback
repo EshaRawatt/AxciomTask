@@ -1,0 +1,28 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const PORT = 3000;
+
+// Middleware to parse form data
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Serve static files (e.g., CSS, HTML)
+app.use(express.static('public'));
+
+// Handle login POST request
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    // For demonstration purposes, use a hardcoded username and password
+    if (username === 'testuser' && password === '1234') {
+        res.send('Login successful!');
+    } else {
+        res.send('Invalid username or password.');
+    }
+});
+
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
